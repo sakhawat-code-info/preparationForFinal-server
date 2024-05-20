@@ -1,14 +1,14 @@
 const express = require('express')
 const app = express()
 const { MongoClient, ServerApiVersion } = require('mongodb');
+require('dotenv').config()
 const cors = require('cors');
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
 
 
 // midleware
 app.use(cors());
 app.use(express.json());
-
 
 const uri = `mongodb+srv://${process.env.S3_BUCKET}:${process.env.SECRET_KEY}@cluster0.9i3jisk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
@@ -35,6 +35,10 @@ async function run() {
             const result = await menuCollection.find().toArray();
             res.send(result);
         })
+        app.get('/reviews', async (req, res) => {
+            const result = await reviewsCollection.find().toArray();
+            res.send(result);
+        })
 
 
 
@@ -57,21 +61,6 @@ run().catch(console.dir);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
@@ -82,12 +71,10 @@ app.listen(port, () => {
 
 
 
+// S3_BUCKET="preparationForFinal"
+// SECRET_KEY="mQKT33u0FYzYiawP"
 
 
-
-
-// S3_BUCKET=preparationForFinal
-// SECRET_KEY=mQKT33u0FYzYiawP
 
 
 
