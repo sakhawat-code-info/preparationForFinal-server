@@ -26,6 +26,21 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
 
 
+        const database = client.db("12preparationDB");
+        const menuCollection = database.collection("menu");
+        const reviewsCollection = database.collection("reviews");
+
+
+        app.get('/menu', async (req, res) => {
+            const result = await menuCollection.find().toArray();
+            res.send(result);
+        })
+
+
+
+
+
+
 
 
 
@@ -64,3 +79,16 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
+
+
+
+
+
+// S3_BUCKET=preparationForFinal
+// SECRET_KEY=mQKT33u0FYzYiawP
+
+
+
+
