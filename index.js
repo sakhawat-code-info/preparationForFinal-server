@@ -29,6 +29,7 @@ async function run() {
         const database = client.db("12preparationDB");
         const menuCollection = database.collection("menu");
         const reviewsCollection = database.collection("reviews");
+        const orderCollection = database.collection("orderedFood");
 
 
         app.get('/menu', async (req, res) => {
@@ -41,7 +42,11 @@ async function run() {
         })
 
 
-
+        app.post('/foodOrdered', async (req, res) => {
+            const orderItem = req.body;
+            const result = await orderCollection.insertOne(orderItem);
+            res.send(result);
+        })
 
 
 
