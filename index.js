@@ -48,6 +48,12 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/foodOrdered', async (req, res) => {
+            const email = req.query.body;
+            const query = { email: email }
+            const result = await orderCollection.find(query).toArray();
+            res.send(result);
+        })
 
 
 
